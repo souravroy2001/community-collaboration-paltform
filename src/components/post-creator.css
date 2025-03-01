@@ -1,0 +1,98 @@
+.post-creator {
+  width: 100%;
+  max-width: 700px;
+  margin: 100px auto 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.post-creator-tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tab {
+  flex: 1;
+  padding: 16px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab:hover{
+    color: #666;
+}
+
+.tab.active {
+  color: #0a66c2;
+  border-bottom: 2px solid #0a66c2;
+}
+
+.tab:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.post-creator-content {
+  padding: 20px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.preview-button,
+.publish-button {
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preview-button {
+  background-color: transparent;
+  border: 1px solid #0a66c2;
+  color: #0a66c2;
+}
+
+.preview-button:hover {
+  background-color: rgba(10, 102, 194, 0.1);
+}
+
+.publish-button {
+  background-color: #0a66c2;
+  border: none;
+  color: white;
+}
+
+.publish-button:hover {
+  background-color: #004182;
+}
+
+.preview-button:disabled,
+.publish-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: #333;
+}

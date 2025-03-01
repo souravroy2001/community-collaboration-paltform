@@ -8,8 +8,8 @@ import LoginPage, {
 } from "@react-login-page/page6";
 import { LogAuthContext } from "../context/LogAuth";
 import { Link } from "react-router-dom";
-import { Image, Alert, Flex, Button } from "@chakra-ui/react";
-import { loginUser, registerWithGoogleUser } from "../firebase/auth";
+import { Image, Flex, Button } from "@chakra-ui/react";
+import { loginUser, loginWithGoogleUser } from "../firebase/auth";
 import { ThemeProvider } from "../context/ThemeAuth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { IoLogoGoogle } from "react-icons/io5";
@@ -17,8 +17,7 @@ function LoginForm() {
   const { theme } = useContext(ThemeProvider);
   const { userLogin, loading, currentUser } = useContext(LogAuthContext);
   const [showPassword, setShowPassword] = useState(false);
-
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -26,17 +25,19 @@ function LoginForm() {
     const formData = new FormData(event.target);
     const finalData = Object.fromEntries(formData);
 
+    console.log("Extracted Form Data:", finalData);
+
     try {
-      await loginUser(finalData.email, finalData.password);
+      await loginUser(finalData?.Email, finalData?.Password);
       setError("Login successful");
     } catch (error) {
-      setError("Failed to login:", error.message);
+      setError(`Failed to login: ${error.message}`);
     }
   }
 
   async function handleGoogleLogin() {
     try {
-      await registerWithGoogleUser();
+      await loginWithGoogleUser();
       setError("Google login successful");
     } catch (error) {
       setError("Google login failed:", error.message);
@@ -52,6 +53,7 @@ function LoginForm() {
           color: theme ? "#000" : "#fff",
         }}
       >
+        {console.log(error)}
         <Title>
           <Logo>
             <Link to={"/"}>
@@ -76,20 +78,6 @@ function LoginForm() {
           width={"100%"}
           zIndex={99}
         >
-          {error && (
-            <Alert
-              background={theme ? "#edeff3" : "#080710"}
-              color={theme ? "#000" : "#fff"}
-              w={400}
-              position={"absolute"}
-              top={-180}
-              rounded={"2xl"}
-              status="error"
-              mb={4}
-            >
-              {error}
-            </Alert>
-          )}
           <Button
             bg={theme ? "#eff1f5" : "#28272f"}
             color={theme ? "#000" : "#fff"}
@@ -97,19 +85,19 @@ function LoginForm() {
             onClick={handleGoogleLogin}
             cursor={"pointer"}
           >
-             <IoLogoGoogle />
+            <IoLogoGoogle />
           </Button>
         </Flex>
 
         <Username visible={false} />
         <Password visible={false} />
         <Username
-          required
           type="email"
           keyname="Email"
           index={2}
           placeholder="Enter Your Email"
           label="Email"
+          required
         />
         <Password
           required

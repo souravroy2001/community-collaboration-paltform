@@ -8,6 +8,7 @@ import NotFound from "./components/NotFound";
 import ProtectedRoutes from "./context/ProtectedRoutes";
 import Community from "./components/Community";
 import Profile from "./components/Profile";
+import PostCreator from "./components/PostCreator";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/community" element={<Community />} />
+        <Route path="/post-creator" element={<PostCreator />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />

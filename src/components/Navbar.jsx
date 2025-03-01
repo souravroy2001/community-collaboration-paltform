@@ -61,7 +61,7 @@ function Navbar() {
           >
             <NavLink to={"/"}>Home</NavLink>
             <NavLink to={"/community"}>Community</NavLink>
-            <NavLink to={"/salary"}>Add Todo</NavLink>
+            <NavLink to={"/post-creator"}>Post Creator</NavLink>
             <NavLink to={"/calendar"}>Calendar</NavLink>
             {userLogin ? (
               <NavLink to={"./logout"} onClick={doSignout}>

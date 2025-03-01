@@ -1,0 +1,161 @@
+.post-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.preview-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.preview-header h2 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.preview-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+.preview-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+}
+
+.preview-user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.preview-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #f3f3f3;
+  margin-right: 12px;
+}
+
+.preview-user-name {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.preview-user-headline {
+  font-size: 14px;
+  color: #666;
+}
+
+.preview-post-time {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.preview-content {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: #000;
+}
+
+.preview-media-grid {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.preview-media-grid.media-count-1 {
+  grid-template-columns: 1fr;
+}
+
+.preview-media-grid.media-count-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.preview-media-grid.media-count-3,
+.preview-media-grid.media-count-4 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.preview-media-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-media-item img,
+.preview-media-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-engagement {
+  display: flex;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #666;
+}
+
+.preview-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.back-button,
+.publish-button {
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button {
+  background-color: transparent;
+  border: 1px solid #666;
+  color: #666;
+}
+
+.back-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.publish-button {
+  background-color: #0a66c2;
+  border: none;
+  color: white;
+}
+
+.publish-button:hover {
+  background-color: #004182;
+}
+
+.publish-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hashtag {
+  color: #0a66c2;
+  font-weight: 500;
+}
+
+.mention {
+  display: inline-block;
+  background-color: rgba(10, 102, 194, 0.1);
+  color: #0a66c2;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-weight: 500;
+}
