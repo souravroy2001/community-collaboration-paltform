@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import ProtectedRoutes from "./context/ProtectedRoutes";
+import Community from "./components/Community";
 
 function App() {
   return (
