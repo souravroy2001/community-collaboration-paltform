@@ -1,0 +1,46 @@
+.homeDash{
+    width: 500px;
+    border-radius:40px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.homeHead{
+    display: flex;
+    justify-content: space-between;
+}
+.homeHead>p{
+    font-weight: 700;
+    padding-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.homeHead>img{
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.trendingPost{
+    display: flex;
+    gap: 10px;
+}
+.trendingPost>div{
+    margin-top: 20px;
+    width: 150px;
+    height: 100px;
+    border-radius:20px;
+}
+.trendingPost>div:nth-child(1){
+    background-color: pink;
+}
+.trendingPost>div:nth-child(2){
+    background-color: rgb(253, 201, 87);
+}
+.trendingPost>div:nth-child(3){
+    background-color: rgb(191, 135, 255);
+}
+.userProfile{
+    font-weight: 700;
+    display: flex;
+    margin-top: 20px;
+}

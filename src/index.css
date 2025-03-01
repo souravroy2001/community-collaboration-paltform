@@ -8,8 +8,8 @@ body {
   overflow-x: hidden;
   background-color: #fff;
   color: black;
+  padding-top: 90px;
 }
-
 .active {
   color: tomato;
 }
@@ -47,7 +47,7 @@ body {
 
 #showPassword {
     z-index: 5;
-    background-color: #37373e;
+    background-color: #4b4b55;
     padding: 10px;
 }
 
