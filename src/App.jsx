@@ -6,8 +6,6 @@ import { Route, Routes } from "react-router";
 import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import ProtectedRoutes from "./context/ProtectedRoutes";
-import Community from "./components/Community";
-
 
 function App() {
   return (
@@ -18,6 +16,7 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

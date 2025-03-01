@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import axios from "axios";
 
 export const LogAuthContext = createContext(null);
 
@@ -9,16 +10,32 @@ function LogAuth({ children }) {
   const [userLogin, setUserLogin] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  async function fetUser(user) {
+    try {
+      const response = await axios.get(
+        "https://masai-hackathon-2025-default-rtdb.firebaseio.com/community/users.json"
+      );
+      const data = await response.data;
+
+      for (let key in data) {
+        if (data[key]?.email === user?.email) {
+          setCurrentUser(data[key]);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser(user);
         setUserLogin(true);
         console.log("user is logged in.");
+        fetUser(user);
       } else {
-        console.log("No user is logged in.");
-        setCurrentUser(null);
         setUserLogin(false);
+        console.log("No user is logged in.");
       }
       setLoading(false);
     });
@@ -29,7 +46,7 @@ function LogAuth({ children }) {
     userLogin,
     loading,
   };
-console.log(currentUser);
+
   return (
     <LogAuthContext.Provider value={value}>
       {!loading && children}

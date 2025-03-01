@@ -8,11 +8,13 @@ import { ThemeProvider } from "../context/ThemeAuth";
 import { LogAuthContext } from "../context/LogAuth";
 import { doSignout } from "../firebase/auth";
 import { Avatar } from "./ui/avatar";
+import { ProfileProvider } from "@/context/ProfileContext";
 
 function Navbar() {
   const [menuToggle, setMenuToggle] = useState(true);
   const { theme, toggleTheme } = useContext(ThemeProvider);
   const { userLogin } = useContext(LogAuthContext);
+  const { profileImage } = useContext(ProfileProvider)
 
   function toggleMenu() {
     setMenuToggle((prev) => !prev);
@@ -25,7 +27,7 @@ function Navbar() {
         align={"center"}
         w={"100%"}
         p={5}
-        bg={theme ? "gray.200" : "gray.800"}
+        bg={theme ? "gray.200" : "#131c2e"}
         position={"fixed"}
         top={0}
         zIndex={9999}
@@ -81,12 +83,10 @@ function Navbar() {
             </Button>
             {userLogin && (
               <Avatar
+                as={Link}
+                to="/profile"
                 name="Sourav Roy"
-                src={
-                  theme
-                    ? "/Default Profile Image In Black Color.svg"
-                    : "/Default Profile Image In White Color.svg"
-                }
+                src={profileImage}
               />
             )}
             <Button id="hamburger" display={"none"} onClick={toggleMenu}>
