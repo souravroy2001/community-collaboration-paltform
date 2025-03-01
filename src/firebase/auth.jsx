@@ -39,10 +39,19 @@ async function registerUser(name, email, password) {
 
     // Post user data to Firebase Realtime Database
     await postUser(userObj);
-
+    alert("Registration successful!");
     return user;
   } catch (error) {
     console.error("Error registering user:", error.message);
+    if (error.code === "auth/email-already-in-use") {
+      alert("User is already registered. Please log in.");
+    } else if (error.code === "auth/weak-password") {
+      alert("Password is too weak. Please use a stronger password.");
+    } else if (error.code === "auth/invalid-email") {
+      alert("Invalid email format. Please enter a valid email.");
+    } else {
+      alert(`Registration failed: ${error.message}`);
+    }
     throw error;
   }
 }
@@ -62,15 +71,6 @@ async function postUser(userObj) {
     console.log("User data posted successfully:", data);
   } catch (error) {
     console.error("Error posting user data:", error.message);
-  }
-}
-
-async function loginUser(email, password) {
-  try {
-    return await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.error("Error logging in:", error.message);
-    throw error;
   }
 }
 
@@ -107,10 +107,52 @@ async function registerWithGoogleUser() {
   }
 }
 
+async function loginUser(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    console.log("User signed in:", userCredential.user);
+    window.location.href = "/";
+    alert("Login successful!");
+    return userCredential.user;
+  } catch (error) {
+    console.error("Error logging in:", error.message);
+
+    if (error.code === "auth/invalid-credential") {
+      alert("Invalid email or password. Please try again.");
+    } else if (error.code === "auth/user-not-found") {
+      alert("User not found. Please register first.");
+    } else if (error.code === "auth/wrong-password") {
+      alert("Incorrect password. Please try again.");
+    } else if (error.code === "auth/too-many-requests") {
+      alert("Too many failed login attempts. Try again later.");
+    } else {
+      alert(`Login failed: ${error.message}`);
+    }
+
+    throw error;
+  }
+}
+
+async function loginWithGoogleUser() {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    console.log("User signed in:", result.user);
+    window.location.href = "/";
+    return result.user;
+  } catch (error) {
+    console.error("Error with Google login:", error.message);
+    throw error;
+  }
+}
+
 async function doSignout() {
   return signOut(auth)
     .then(() => {
-      // Sign-out successful
       window.location.href = "/";
     })
     .catch((error) => {
@@ -161,4 +203,5 @@ export {
   doPasswordReset,
   doPasswordChange,
   doSendEmailVerification,
+  loginWithGoogleUser,
 };

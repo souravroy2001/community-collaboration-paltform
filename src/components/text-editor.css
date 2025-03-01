@@ -1,0 +1,128 @@
+.text-editor-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.formatting-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+  color: #000;
+}
+
+.formatting-toolbar button {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: none;
+  border: 1px solid #e0e0e0;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.formatting-toolbar button:hover {
+  background-color: #f3f3f3;
+}
+
+.text-editor {
+  min-height: 150px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  background-color: transparent;
+  border-radius: 4px;
+  outline: none;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+.text-editor:empty:before {
+  content: attr(placeholder);
+  color: #aaa;
+}
+
+.text-editor:focus {
+  border-color: #0a66c2;
+  box-shadow: 0 0 0 2px rgba(10, 102, 194, 0.2);
+}
+
+.mention {
+  display: inline-block;
+  background-color: rgba(10, 102, 194, 0.1);
+  color: #0a66c2;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.hashtag {
+  color: #0a66c2;
+  font-weight: 500;
+}
+
+.mention-suggestions {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.mention-suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.mention-suggestion-item:hover {
+  background-color: #f3f3f3;
+}
+
+.mention-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #0a66c2;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 12px;
+}
+
+.mention-user-info {
+  flex: 1;
+}
+
+.mention-name {
+  font-weight: 500;
+}
+
+.mention-username {
+  font-size: 14px;
+  color: #666;
+}
+
+.mention-no-results {
+  padding: 12px;
+  text-align: center;
+  color: #666;
+}
+
+.editor-tips {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+}
