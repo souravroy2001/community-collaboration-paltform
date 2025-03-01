@@ -7,6 +7,7 @@ import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import ProtectedRoutes from "./context/ProtectedRoutes";
 import Community from "./components/Community";
+import Profile from "./components/Profile";
 
 function App() {
   return (
