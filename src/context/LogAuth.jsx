@@ -7,6 +7,7 @@ export const LogAuthContext = createContext(null);
 
 function LogAuth({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
+  const [users, setUsers] = useState(null);
   const [userLogin, setUserLogin] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -16,12 +17,14 @@ function LogAuth({ children }) {
         "https://masai-hackathon-2025-default-rtdb.firebaseio.com/community/users.json"
       );
       const data = await response.data;
-
+      const arr = [];
       for (let key in data) {
+        arr.push({ id: key, ...data[key] })
         if (data[key]?.email === user?.email) {
           setCurrentUser(data[key]);
         }
       }
+      setUsers(arr)
     } catch (error) {
       console.log(error.message);
     }
@@ -45,6 +48,7 @@ function LogAuth({ children }) {
     currentUser,
     userLogin,
     loading,
+    users
   };
 
   return (
