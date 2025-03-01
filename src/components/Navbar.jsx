@@ -58,7 +58,7 @@ function Navbar() {
             color={theme ? "#000" : "#fff"}
           >
             <NavLink to={"/"}>Home</NavLink>
-            <NavLink to={"/people"}>People</NavLink>
+            <NavLink to={"/community"}>Community</NavLink>
             <NavLink to={"/salary"}>Add Todo</NavLink>
             <NavLink to={"/calendar"}>Calendar</NavLink>
             {userLogin ? (
