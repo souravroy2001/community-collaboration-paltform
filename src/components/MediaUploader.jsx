@@ -1,16 +1,28 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useDrag, useDrop } from "react-dnd";
 import "./media-uploader.css";
 
-export default function MediaUploader({
-  onUpload,
-  mediaFiles,
-  mediaPreviewUrls,
-  onRemoveMedia,
-}) {
+export default function MediaUploader({ onUpload, mediaFiles, onRemoveMedia }) {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
+  const containerRef = useRef(null);
+
+  // Drag and Drop Container
+  const [{ isDraggingContainer }, drag] = useDrag(() => ({
+    type: "MEDIA_UPLOADER",
+    collect: (monitor) => ({
+      isDraggingContainer: !!monitor.isDragging(),
+    }),
+  }));
+
+  const [, drop] = useDrop(() => ({
+    accept: "MEDIA_UPLOADER",
+    drop: () => ({ name: "MediaUploader" }),
+  }));
+
+  drag(drop(containerRef));
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -44,90 +56,54 @@ export default function MediaUploader({
     if (e.target.files && e.target.files.length > 0) {
       const filesArray = Array.from(e.target.files);
       onUpload(filesArray);
-
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
-    }
-  };
-
-  const handleButtonClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const getFileTypeIcon = (file) => {
-    if (file.type.startsWith("image/")) {
-      return "🖼️";
-    } else if (file.type.startsWith("video/")) {
-      return "🎬";
-    } else if (file.type.startsWith("application/pdf")) {
-      return "📄";
-    } else if (file.type.includes("document") || file.type.includes("msword")) {
-      return "📝";
-    } else {
-      return "📎";
-    }
-  };
-
-  const renderPreview = (file, url, index) => {
-    if (file.type.startsWith("image/")) {
-      return (
-        <div className="media-preview-item" key={index}>
-          <img src={url || "/placeholder.svg"} alt={`Preview ${index}`} />
-          <button
-            className="remove-media-button"
-            onClick={() => onRemoveMedia(index)}
-            aria-label="Remove media"
-          >
-            ✕
-          </button>
-        </div>
-      );
-    } else if (file.type.startsWith("video/")) {
-      return (
-        <div className="media-preview-item video-preview" key={index}>
-          <video controls>
-            <source src={url} type={file.type} />
-            Your browser does not support the video tag.
-          </video>
-          <button
-            className="remove-media-button"
-            onClick={() => onRemoveMedia(index)}
-            aria-label="Remove media"
-          >
-            ✕
-          </button>
-        </div>
-      );
-    } else {
-      return (
-        <div className="media-preview-item document-preview" key={index}>
-          <div className="document-icon">{getFileTypeIcon(file)}</div>
-          <div className="document-name">{file.name}</div>
-          <button
-            className="remove-media-button"
-            onClick={() => onRemoveMedia(index)}
-            aria-label="Remove media"
-          >
-            ✕
-          </button>
-        </div>
-      );
+      fileInputRef.current.value = "";
     }
   };
 
   return (
-    <div className="media-uploader">
-      {mediaPreviewUrls.length > 0 && (
+    <div
+      ref={containerRef}
+      className={`media-uploader ${
+        isDraggingContainer ? "dragging-container" : ""
+      }`}
+    >
+      {mediaFiles.length > 0 && (
         <div className="media-previews">
-          {mediaFiles.map((file, index) =>
-            renderPreview(file, mediaPreviewUrls[index], index)
-          )}
+          {mediaFiles.map((file, index) => {
+            const fileType = file.type.split("/")[0]; // Get file type (image, video, application)
+            const previewUrl = URL.createObjectURL(file); // Create object URL for preview
+
+            return (
+              <div className="media-preview-item" key={index}>
+                {/* Image Preview */}
+                {fileType === "image" && (
+                  <img src={previewUrl} alt={`Preview ${index}`} width="150" />
+                )}
+                {/* Video Preview */}
+                {fileType === "video" && (
+                  <video controls width="150">
+                    <source src={previewUrl} type={file.type} />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+                {/* Document Preview */}
+                {fileType === "application" && (
+                  <div className="document-preview">📄 {file.name}</div>
+                )}
+                {/* Remove Button */}
+                <button
+                  className="remove-media-button"
+                  onClick={() => onRemoveMedia(index)}
+                >
+                  ✕
+                </button>
+              </div>
+            );
+          })}
         </div>
       )}
 
+      {/* Upload Area */}
       <div
         className={`upload-area ${isDragging ? "dragging" : ""}`}
         onDragEnter={handleDragEnter}
@@ -143,14 +119,14 @@ export default function MediaUploader({
           accept="image/*,video/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           style={{ display: "none" }}
         />
-
-        <div className="upload-content">
+        <div
+          onClick={() => fileInputRef.current.click()}
+          className="upload-content"
+        >
           <div className="upload-icon">📁</div>
           <p>
             Drag and drop files here, or{" "}
-            <button onClick={handleButtonClick} className="browse-button">
-              browse
-            </button>
+            <button className="browse-button">browse</button>
           </p>
           <p className="upload-hint">Supports images, videos, and documents</p>
         </div>

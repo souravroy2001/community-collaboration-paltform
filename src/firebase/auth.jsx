@@ -94,6 +94,11 @@ async function registerWithGoogleUser() {
       bio: "",
       following: [],
       follow: [],
+      achievements: [],
+      skills: [],
+      projects: [],
+      endorsements: [],
+      activity: [],
     };
 
     await postUser(userObj);
