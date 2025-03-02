@@ -17,11 +17,14 @@ function LogAuth({ children }) {
         "https://masai-hackathon-2025-default-rtdb.firebaseio.com/community/users.json"
       );
       const data = await response.data;
+
       const arr = [];
+
       for (let key in data) {
-        arr.push({ id: key, ...data[key] })
+        arr.push({ id: key, ...data[key] });
+
         if (data[key]?.email === user?.email) {
-          setCurrentUser(data[key]);
+          setCurrentUser({ id: key, ...data[key] });
         }
       }
       setUsers(arr)

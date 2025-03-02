@@ -103,7 +103,7 @@ async function registerWithGoogleUser() {
 
     await postUser(userObj);
 
-    window.location.href = "/";
+    window.location.href = "/dashboard";
 
     return result;
   } catch (error) {
@@ -120,7 +120,7 @@ async function loginUser(email, password) {
       password
     );
     console.log("User signed in:", userCredential.user);
-    window.location.href = "/";
+    window.location.href = "/dashboard";
     alert("Login successful!");
     return userCredential.user;
   } catch (error) {
@@ -147,7 +147,7 @@ async function loginWithGoogleUser() {
   try {
     const result = await signInWithPopup(auth, provider);
     console.log("User signed in:", result.user);
-    window.location.href = "/";
+    window.location.href = "/dashboard";
     return result.user;
   } catch (error) {
     console.error("Error with Google login:", error.message);

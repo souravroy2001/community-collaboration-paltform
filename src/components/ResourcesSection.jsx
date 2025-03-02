@@ -1,8 +1,10 @@
+import { ThemeProvider } from "@/context/ThemeAuth";
 import "./LandingPage.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 const ResourcesSection = () => {
   const [activeTab, setActiveTab] = useState("web-development");
+  const {theme} = useContext(ThemeProvider)
 
   const coursesData = [
     {
@@ -138,8 +140,13 @@ const ResourcesSection = () => {
 
   return (
     <section id="resources" className="resources-section">
-      <div className="section-header">
-        <span className="badge">Resources</span>
+      <div
+        className="section-header"
+        style={{ color: theme ? "#000" : "#fff" }}
+      >
+        <span className="badge" style={{ color: "#000" }}>
+          Resources
+        </span>
         <h2 className="section-title">Learning Paths & Resources</h2>
         <p className="section-description">
           Explore our curated learning paths and resources to help you achieve
@@ -152,6 +159,7 @@ const ResourcesSection = () => {
           {coursesData.map((data) => (
             <button
               key={data.tab}
+              style={{backgroundColor: "#fff",}}
               className={`tab-button ${activeTab === data.tab ? "active" : ""}`}
               onClick={() => setActiveTab(data.tab)}
             >

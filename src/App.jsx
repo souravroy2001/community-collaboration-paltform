@@ -25,9 +25,44 @@ function App() {
         <Route path="/post-creator" element={<PostCreator />} />
         <Route path="/leading-page" element={<LandingPage />} />
         <Route path="/community" element={<CommunityPage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/community"
+          element={
+            <ProtectedRoutes>
+              <Community />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/post-creator"
+          element={
+            <ProtectedRoutes>
+              {" "}
+              <PostCreator />{" "}
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoutes>
+              {" "}
+              <Home />{" "}
+            </ProtectedRoutes>
+          }
+        />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoutes>
+              {" "}
+              <Profile />{" "}
+            </ProtectedRoutes>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

@@ -89,7 +89,7 @@ function Register() {
     try {
       await registerUser(name, email, password);
       console.log("Registration successful!");
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       const errorCode = err.code;
 
@@ -120,7 +120,7 @@ function Register() {
         >
           <Title>
             <Logo>
-              <Link to={"/"}>
+              <Link to={"/dashboard"}>
                 <Image
                   src={
                     theme
