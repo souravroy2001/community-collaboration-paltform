@@ -9,6 +9,7 @@ import ProtectedRoutes from "./context/ProtectedRoutes";
 import Community from "./components/Community";
 import Profile from "./components/Profile";
 import PostCreator from "./components/PostCreator";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/community" element={<Community />} />
         <Route path="/post-creator" element={<PostCreator />} />
+        <Route path="/leading-page" element={<LandingPage />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />

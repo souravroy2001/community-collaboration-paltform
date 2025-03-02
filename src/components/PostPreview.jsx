@@ -1,18 +1,24 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import "./post-preview.css";
+import { Image } from "@chakra-ui/react";
+import { ProfileProvider } from "@/context/ProfileContext";
+import { LogAuthContext } from "@/context/LogAuth";
 
 export default function PostPreview({
   content,
-  mediaPreviewUrls,
+  mediaFiles = [],
+  mediaPreviewUrls = [],
   onBack,
   onPublish,
   isPublishing,
 }) {
   const contentRef = useRef(null);
+  const { profileImage } = useContext(ProfileProvider);
+  const { currentUser } = useContext(LogAuthContext);
 
   useEffect(() => {
     if (contentRef.current) {
-      let processedContent = content;
+      let processedContent = content || "";
 
       processedContent = processedContent.replace(
         /#(\w+)/g,
@@ -23,8 +29,11 @@ export default function PostPreview({
     }
   }, [content]);
 
+  console.log("Media Preview URLs:", mediaPreviewUrls);
+  console.log("Media Files:", mediaFiles);
+
   const renderMediaPreviews = () => {
-    if (mediaPreviewUrls.length === 0) return null;
+    if (!mediaPreviewUrls?.length) return null;
 
     return (
       <div
@@ -34,13 +43,42 @@ export default function PostPreview({
         )}`}
       >
         {mediaPreviewUrls.map((url, index) => {
-          if (url.includes("video")) {
+          const file = mediaFiles[index] || {};
+          const fileType = file?.type || ""; // Use file.type since blob URLs lack extensions
+
+          if (fileType.startsWith("video/")) {
             return (
               <div className="preview-media-item" key={index}>
-                <video controls>
-                  <source src={url} />
+                <video controls width="100%" height="auto">
+                  <source src={url} type={fileType} />
                   Your browser does not support the video tag.
                 </video>
+              </div>
+            );
+          } else if (
+            fileType.startsWith("application/") ||
+            fileType.includes("pdf")
+          ) {
+            return (
+              <div className="preview-media-item document-preview" key={index}>
+                <iframe
+                  src={url}
+                  width="100%"
+                  height="400px"
+                  title={`Document Preview ${index + 1}`}
+                ></iframe>
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                  📄 {file.name || "Document"}
+                </a>
+              </div>
+            );
+          } else if (fileType.startsWith("audio/")) {
+            return (
+              <div className="preview-media-item" key={index}>
+                <audio controls>
+                  <source src={url} type={fileType} />
+                  Your browser does not support the audio tag.
+                </audio>
               </div>
             );
           } else {
@@ -67,10 +105,13 @@ export default function PostPreview({
 
       <div className="preview-card">
         <div className="preview-user-info">
-          <div className="preview-avatar"></div>
+          <div className="preview-avatar">
+            <Image src={profileImage} />
+          </div>
           <div className="preview-user-details">
-            <div className="preview-user-name">Your Name</div>
-            <div className="preview-user-headline">Your Headline</div>
+            <div className="preview-user-name">
+              {currentUser?.name || "No Name available"}
+            </div>
             <div className="preview-post-time">Just now</div>
           </div>
         </div>

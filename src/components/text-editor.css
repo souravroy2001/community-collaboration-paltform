@@ -38,8 +38,7 @@
   font-size: 16px;
   line-height: 1.5;
   color: #333;
-  direction: ltr !important;
-  text-align: left !important;
+  text-align: left;
 }
 
 .text-editor:empty:before {

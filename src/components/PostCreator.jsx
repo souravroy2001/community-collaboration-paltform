@@ -3,6 +3,9 @@ import "./post-creator.css";
 import TextEditor from "./TextEditor";
 import MediaUploader from "./MediaUploader";
 import PostPreview from "./PostPreview";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import ResourcesSection from "./ResourcesSection";
 
 export default function PostCreator() {
   const [content, setContent] = useState("");
@@ -88,12 +91,14 @@ export default function PostCreator() {
           <>
             <TextEditor content={content} onChange={handleContentChange} />
 
-            <MediaUploader
-              onUpload={handleMediaUpload}
-              mediaFiles={mediaFiles}
-              mediaPreviewUrls={mediaPreviewUrls}
-              onRemoveMedia={handleRemoveMedia}
-            />
+            <DndProvider backend={HTML5Backend}>
+              <MediaUploader
+                onUpload={handleMediaUpload}
+                mediaFiles={mediaFiles}
+                mediaPreviewUrls={mediaPreviewUrls}
+                onRemoveMedia={handleRemoveMedia}
+              />
+            </DndProvider>
 
             <div className="post-actions">
               <button
