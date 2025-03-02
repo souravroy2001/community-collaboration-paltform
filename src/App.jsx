@@ -11,6 +11,10 @@ import Profile from "./components/Profile";
 import PostCreator from "./components/PostCreator";
 import LandingPage from "./components/LandingPage";
 
+import Profile from "./components/Profile";
+import CommunityPage from "./components/CommunityPage";
+
+
 function App() {
   return (
     <>
@@ -20,6 +24,7 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/post-creator" element={<PostCreator />} />
         <Route path="/leading-page" element={<LandingPage />} />
+        <Route path="/community" element={<CommunityPage />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
