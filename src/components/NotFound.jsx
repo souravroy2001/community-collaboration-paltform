@@ -85,7 +85,7 @@ const NotFound = () => {
             py="2rem"
             _hover={{ bg: "#3d3d3d" }}
             mt="2rem"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/dashboard")}
           >
             Back to Homepage
           </Button>

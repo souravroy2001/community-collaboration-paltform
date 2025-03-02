@@ -9,6 +9,7 @@ function LogAuth({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [userLogin, setUserLogin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [users, setUsers] = useState(null);
 
   async function fetUser(user) {
     try {
@@ -17,9 +18,13 @@ function LogAuth({ children }) {
       );
       const data = await response.data;
 
+      const arr = [];
+
       for (let key in data) {
+        arr.push({ id: key, ...data[key] });
+
         if (data[key]?.email === user?.email) {
-          setCurrentUser(data[key]);
+          setCurrentUser({ id: key, ...data[key] });
         }
       }
     } catch (error) {

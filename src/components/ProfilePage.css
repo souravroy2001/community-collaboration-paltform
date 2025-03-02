@@ -213,9 +213,13 @@
 .card-content {
   padding: 16px;
 }
+/* .achievements-card{
+  display: flex;
+} */
 
 .card-footer {
   padding: 12px 16px;
+  display: flex;
   border-top: 1px solid var(--color-border);
 }
 
@@ -675,6 +679,7 @@
 .button-outline {
   background-color: transparent;
   border: 1px solid var(--color-border);
+  color: #fff;
 }
 
 .button-outline:hover {

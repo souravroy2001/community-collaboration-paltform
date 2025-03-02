@@ -80,7 +80,7 @@ h6 {
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-hover);
+  background-color: #030300;
 }
 
 .btn-secondary {
@@ -98,7 +98,8 @@ h6 {
 }
 
 .btn-outline:hover {
-  background-color: var(--muted-background);
+  background-color: #fff;
+  color: #000;
 }
 
 .btn-outline-light {
@@ -228,6 +229,7 @@ h6 {
   padding: 0.25rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 500;
+  width: fit-content;
 }
 
 /* Section Styles */

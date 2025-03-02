@@ -20,9 +20,17 @@ export default function LandingPage() {
       <main className="landing-main">
         <section className="hero-section">
           <div className="hero-content">
-            <div className="hero-text">
-              <span className="badge">Join our growing community</span>
-              <h1 className="hero-title">
+            <div
+              className="hero-text"
+              style={{ color: theme ? "#000" : "#fff" }}
+            >
+              <span className="badge" style={{ color: "#000" }}>
+                Join our growing community
+              </span>
+              <h1
+                className="hero-title"
+                style={{ color: theme ? "#000" : "#fff" }}
+              >
                 Your Gateway to Learning and Growth
               </h1>
               <p className="hero-description">
@@ -49,7 +57,10 @@ export default function LandingPage() {
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
                 </button>
-                <button className="btn btn-outline btn-lg">
+                <button
+                  style={{ border: theme ? "1px solid #000" : "" }}
+                  className="btn btn-outline btn-lg"
+                >
                   Explore Resources
                 </button>
               </div>
@@ -70,17 +81,25 @@ export default function LandingPage() {
                     alt="Member"
                     className="avatar"
                   />
-                  <div className="avatar avatar-more">+5</div>
+                  <div style={{ color: "#000" }} className="avatar avatar-more">
+                    +5
+                  </div>
                 </div>
                 <div className="member-text">
-                  Join over <span className="highlight">5,000+</span> members
-                  already learning
+                  Join over{" "}
+                  <span
+                    style={{ color: theme ? "#000" : "#fff" }}
+                    className="highlight"
+                  >
+                    5,000+
+                  </span>{" "}
+                  members already learning
                 </div>
               </div>
             </div>
             <div className="hero-image-container">
               <img
-                src={"/placeholder.svg"}
+                src={"/hero-image.png"}
                 alt="Community Collaboration"
                 className="hero-image"
               />
@@ -89,8 +108,13 @@ export default function LandingPage() {
         </section>
 
         <section id="features" className="features-section">
-          <div className="section-header">
-            <span className="badge">Features</span>
+          <div
+            className="section-header"
+            style={{ color: theme ? "#000" : "#fff" }}
+          >
+            <span className="badge" style={{ color: "#000" }}>
+              Features
+            </span>
             <h2 className="section-title">Everything You Need to Succeed</h2>
             <p className="section-description">
               Our platform provides all the tools and resources you need to
@@ -379,7 +403,10 @@ export default function LandingPage() {
 
         <section id="cta" className="cta-section">
           <div className="cta-content">
-            <div className="section-header">
+            <div
+              className="section-header"
+              style={{ color: theme ? "#000" : "#fff" }}
+            >
               <h2 className="section-title cta-title">
                 Ready to Start Your Journey?
               </h2>
@@ -515,7 +542,8 @@ export default function LandingPage() {
             <p
               className="footer-description"
               style={{
-                color: theme ? "#000" : "#fff",}}
+                color: theme ? "#000" : "#fff",
+              }}
             >
               Your gateway to learning and growth. Connect, collaborate, and
               enhance your skills with our community.
