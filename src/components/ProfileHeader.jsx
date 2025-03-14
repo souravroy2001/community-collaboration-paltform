@@ -10,6 +10,8 @@ const ProfileHeader = ({
   handleProfileImageClick,
   handleFollowToggle,
   doSignout,
+  handleProfileImageChange,
+  profileImageInputRef,
 }) => (
   <div className="profile-header-container">
     <div className="banner" style={{ backgroundImage: `url(${coverImage})` }}>
@@ -27,6 +29,13 @@ const ProfileHeader = ({
               <Edit size={20} />
             </div>
           </div>
+          <input
+            type="file"
+            ref={profileImageInputRef}
+            onChange={handleProfileImageChange}
+            accept="image/*"
+            style={{ display: "none" }}
+          />
           <div className="status-indicator"></div>
         </div>
         <div className="profile-info-desktop">

@@ -38,6 +38,8 @@ function Profile() {
         profileImage={profileImage}
         currentUser={currentUser}
         following={following}
+        ProfileHeader={ProfileHeader}
+        profileImageInputRef={profileImageInputRef}
         handleCoverImageClick={handleCoverImageClick}
         handleProfileImageClick={handleProfileImageClick}
         handleFollowToggle={handleFollowToggle}
